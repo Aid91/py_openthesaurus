@@ -23,7 +23,7 @@ class OpenThesaurus(object):
         word = re.sub(regex, "", self.word)
         return word is not ""
 
-    def get_synonyms(self, type="part"):
+    def get_synonyms(self, type="short"):
 
         logger = log.setup_custom_logger(__name__)
 
@@ -59,12 +59,12 @@ class OpenThesaurus(object):
 
     def _get_synonyms_from_category(self, category, type):
 
-        full_regex = r"[()]"
-        part_regex = r"[\(].*?[\)]"
+        long_type_regex = r"[()]"
+        short_type_regex = r"[\(].*?[\)]"
 
-        if type == "full":
-            return [re.sub(full_regex, "", synonym.get("term")).strip() for synonym in category.get("terms")]
-        elif type == "part":
-            return [re.sub(part_regex, "", synonym.get("term")).strip() for synonym in category.get("terms")]
+        if type == "long":
+            return [re.sub(long_type_regex, "", synonym.get("term")).strip() for synonym in category.get("terms")]
+        elif type == "short":
+            return [re.sub(short_type_regex, "", synonym.get("term")).strip() for synonym in category.get("terms")]
         else:
             raise RuntimeError("Type is not valid! Please choose type to be either: full or part")

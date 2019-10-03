@@ -104,18 +104,18 @@ class OpenThesaurusTest(unittest.TestCase):
         # assert
         self.assertFalse(synonyms)
 
-    def test_get_synonyms_full_not_empty(self):
+    def test_get_synonyms_long_not_empty(self):
         # arrange
         word = 'gehen'
 
         # act
         instance = OpenThesaurus(word=word)
-        synonyms = instance.get_synonyms(type='full')
+        synonyms = instance.get_synonyms(type='long')
 
         # assert
         self.assertTrue(synonyms)
 
-    def test_get_synonyms_part_not_empty(self):
+    def test_get_synonyms_short_not_empty(self):
         # arrange
         word = 'gehen'
 
@@ -126,35 +126,35 @@ class OpenThesaurusTest(unittest.TestCase):
         # assert
         self.assertTrue(synonyms)
 
-    def test_get_synonyms_full_part_less(self):
+    def test_get_synonyms_long_short(self):
         # arrange
         word = 'gehen'
 
         # act
         instance = OpenThesaurus(word=word)
-        synonyms_part = instance.get_synonyms()
-        synonyms_full = instance.get_synonyms(type='full')
+        synonyms_short = instance.get_synonyms()
+        synonyms_long = instance.get_synonyms(type='long')
 
         # assert
-        synonyms_full_len = len(".".join(synonyms_full))
-        synonyms_part_len = len(".".join(synonyms_part))
+        synonyms_long_len = len(".".join(synonyms_long))
+        synonyms_short_len = len(".".join(synonyms_short))
 
-        self.assertLessEqual(synonyms_part_len, synonyms_full_len)
+        self.assertLessEqual(synonyms_short_len, synonyms_long_len)
 
-    def test_get_synonyms_full_part_equal(self):
+    def test_get_synonyms_long_short_equal(self):
         # arrange
         word = 'München'
 
         # act
         instance = OpenThesaurus(word=word)
-        synonyms_part = instance.get_synonyms()
-        synonyms_full = instance.get_synonyms(type='full')
+        synonyms_short = instance.get_synonyms()
+        synonyms_long = instance.get_synonyms(type='long')
 
         # assert
-        synonyms_full_len = len(".".join(synonyms_full))
-        synonyms_part_len = len(".".join(synonyms_part))
+        synonyms_long_len = len(".".join(synonyms_long))
+        synonyms_short_len = len(".".join(synonyms_short))
 
-        self.assertLessEqual(synonyms_part_len, synonyms_full_len)
+        self.assertLessEqual(synonyms_short_len, synonyms_long_len)
 
     def test_runtime_error_wrong_type(self):
         # arrange

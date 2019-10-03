@@ -9,9 +9,9 @@ def main():
         description='Get synonyms of German words from openthesaurus.de')
     parser.add_argument('--word', type=str, action='store', required=True,
                         help="Word from which synonyms will be obtained")
-    parser.add_argument('--type', required=False, action='store', choices=['full', 'part'], type=str, default='part',
-                        help="Defaults to type=part which meanst that short versions of synonyms will be returned, without nach/zu prefixes/sufixes."
-                             "On the other hand type=full returns the full versions of synonyms including nach/zu, sich prefixes")
+    parser.add_argument('--type', required=False, action='store', choices=['long', 'short'], type=str, default='short',
+                        help="Defaults to type=short which meanst that short versions of synonyms will be returned, without nach/zu prefixes/sufixes."
+                             "On the other hand type=long returns the full versions of synonyms including nach/zu, sich prefixes")
 
     args = parser.parse_args()
 
