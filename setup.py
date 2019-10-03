@@ -9,6 +9,7 @@ setup(name='py_openthesaurus',
       long_description=description,
       long_description_content_type="text/markdown",
       classifiers=[
+          'Development Status :: 5 - Production/Stable'
           'Intended Audience :: Developers',
           'Intended Audience :: Education',
           'Intended Audience :: Machine Learning',
@@ -21,6 +22,5 @@ setup(name='py_openthesaurus',
       author_email='aidahmetovic91@gmail.com',
       license='MIT',
       packages=find_packages(exclude=['tests*']),
-      install_requires=["translate"],
       entry_points={"console_scripts": ['py_openthesaurus=py_openthesaurus.main:main']},
       zip_safe=False)
