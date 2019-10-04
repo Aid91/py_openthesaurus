@@ -18,7 +18,7 @@ The library can be installed from PyPI:
 
 As a Python library:
 
-```
+```python
 from py_openthesaurus import OpenThesaurus
 
 open_thesaurus = OpenThesaurus(word="München")
@@ -32,7 +32,7 @@ synonyms_long = open_thesaurus.get_synonyms(form='long')
 
 As a command-line tool:
 
-```
+```console
 usage: py_openthesaurus [-h] [--form {long,short}] --word WORD
 
 Get synonyms of German words from www.openthesaurus.de
