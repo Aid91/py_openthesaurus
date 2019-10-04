@@ -1,4 +1,4 @@
-## Python wrapper for obtaining synonyms in German language from www.openthesaurus.de
+## Python wrapper for obtaining synonyms in German language from OpenThesaurus
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/2a302faa81aa41ed8647d917c268f5cd)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Aid91/py_openthesaurus&amp;utm_campaign=Badge_Grade)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
@@ -6,7 +6,7 @@
 When working in Natural Language Processing (NLP) area, synonyms can be an essential part of the data augmentation process. The task of obtaining synonyms for the German language is currently limited since there are no easily accessible lexical databases for the German language. Compared to the WordNet
 lexical database for the English language, which is available as an **nltk** package,  [GermaNet](http://www.sfs.uni-tuebingen.de/GermaNet/) represents only one German lexical database alternative. However, to use **GermaNet** for further research purposes, it is necessary to obtain the license manually. 
 
-This repository represents a Python wrapper implementation for obtaining synonyms in a faster and easier way, using the German synonym database and API from [OpenThesaurus](www.openthesaurus.de).
+This repository represents a Python wrapper implementation for obtaining synonyms in a faster and easier way, using the German synonym database and API from [OpenThesaurus](https://www.openthesaurus.de/).
 
 ### Installation
 
@@ -52,7 +52,7 @@ required arguments:
 
 ### Acknowledgments
 
-* [OpenThesaurus](www.openthesaurus.de) for developing a German synonym database with API from which synonyms for the German language can be obtained
+* [OpenThesaurus](https://www.openthesaurus.de/) for developing a German synonym database with API from which synonyms for the German language can be obtained
 
 ### Licence
 
