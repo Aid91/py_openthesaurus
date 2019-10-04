@@ -12,7 +12,7 @@ This repository represents a Python wrapper implementation for obtaining synonym
 
 The library can be installed from PyPI:
 
-```pip install py_openthesaurus```
+```pip install py-openthesaurus```
 
 ### Usage
 
@@ -56,4 +56,4 @@ required arguments:
 
 ### Licence
 
-Even though this project is under MIT license, please check information about **OpenThesaurus** licensing and API limitations from the following link: [API](https://www.openthesaurus.de/about/api), in the case your software will need an exhaustive amount of synonym requests in a short period of time. 
+Even though this project is under MIT license, please check information about **OpenThesaurus** licensing and API limitations from the following link [API](https://www.openthesaurus.de/about/api), in the case your software will need an exhaustive amount of synonym requests in a short period of time. 
