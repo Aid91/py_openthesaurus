@@ -7,14 +7,18 @@ def main():
     logger = log.setup_custom_logger(__name__)
 
     parser = argparse.ArgumentParser(
-        description='Get synonyms of German words from openthesaurus.de')
-    parser.add_argument('--word', type=str, action='store', required=True,
-                        help="Word from which synonyms will be obtained")
+        description='Get synonyms of German words from www.openthesaurus.de')
+
     parser.add_argument('--form', required=False, action='store', choices=['long', 'short'], type=str, default='short',
                         help="Defaults to form=short which means that short versions of synonyms will be returned, "
-                             "without nach/zu prefixes/sufixes."
-                             "On the other hand form=long returns the full versions of synonyms including nach/zu, "
-                             "sich prefixes/sufixes")
+                             "without nach/zu prefixes/suffixes."
+                             "On the other hand, form=long returns the full versions of synonyms including nach/zu, "
+                             "sich prefixes/suffixes")
+
+    required = parser.add_argument_group('required arguments')
+
+    required.add_argument('--word', type=str, action='store', required=True,
+                          help="A word from which synonyms will be obtained")
 
     args = parser.parse_args()
 
