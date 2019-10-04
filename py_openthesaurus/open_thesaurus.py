@@ -1,8 +1,10 @@
+from urllib.request import Request
 from urllib.request import urlopen
 from urllib.error import URLError
 import simplejson
 import py_openthesaurus.log as log
 import re
+
 
 class OpenThesaurus(object):
 
@@ -23,7 +25,7 @@ class OpenThesaurus(object):
         word = re.sub(regex, "", self.word)
         return word is not ""
 
-    def get_synonyms(self, type="short"):
+    def get_synonyms(self, form="short"):
 
         logger = log.setup_custom_logger(__name__)
 
@@ -31,8 +33,9 @@ class OpenThesaurus(object):
 
             if self.is_entry_word_valid():
                 url = self.url % self.word.translate(self.umlaut_dictionary)
-                with urlopen(url) as response:
-                    return self._get_synonyms_from_response(response, type)
+                request = Request(url)
+                with urlopen(request) as response:
+                    return self._get_synonyms_from_response(response, form)
             else:
                 logger.warn('Please provide a valid (non empty, non null) input word!')
                 return []
@@ -41,30 +44,30 @@ class OpenThesaurus(object):
                 "Please check your internet connection! If your internet connection is ok, Open Thesaurus URL or REST "
                 "API changed!")
             return []
-        except RuntimeError as re:
-            logger.error(repr(re))
+        except RuntimeError as runtime_error:
+            logger.error(repr(runtime_error))
             return []
-        except Exception as ex:
-            logger.error(repr(ex))
+        except Exception as exception:
+            logger.error(repr(exception))
             return []
 
-    def _get_synonyms_from_response(self, response, type):
+    def _get_synonyms_from_response(self, response, form):
         synonyms = []
         json_response = simplejson.loads(response.read())
 
         for category in json_response.get("synsets"):
-            synonyms += self._get_synonyms_from_category(category=category, type=type)
+            synonyms += self._get_synonyms_from_category(category=category, form=form)
 
         return synonyms
 
-    def _get_synonyms_from_category(self, category, type):
+    def _get_synonyms_from_category(self, category, form):
 
-        long_type_regex = r"[()]"
-        short_type_regex = r"[\(].*?[\)]"
+        long_form_regex = r"[()]"
+        short_form_regex = r"[\(].*?[\)]"
 
-        if type == "long":
-            return [re.sub(long_type_regex, "", synonym.get("term")).strip() for synonym in category.get("terms")]
-        elif type == "short":
-            return [re.sub(short_type_regex, "", synonym.get("term")).strip() for synonym in category.get("terms")]
+        if form == "long":
+            return [re.sub(long_form_regex, "", synonym.get("term")).strip() for synonym in category.get("terms")]
+        elif form == "short":
+            return [re.sub(short_form_regex, "", synonym.get("term")).strip() for synonym in category.get("terms")]
         else:
-            raise RuntimeError("Type is not valid! Please choose type to be either: full or part")
+            raise RuntimeError("Form is not valid! Please choose form to be either: long or short")

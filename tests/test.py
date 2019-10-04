@@ -110,7 +110,7 @@ class OpenThesaurusTest(unittest.TestCase):
 
         # act
         instance = OpenThesaurus(word=word)
-        synonyms = instance.get_synonyms(type='long')
+        synonyms = instance.get_synonyms(form='long')
 
         # assert
         self.assertTrue(synonyms)
@@ -133,7 +133,7 @@ class OpenThesaurusTest(unittest.TestCase):
         # act
         instance = OpenThesaurus(word=word)
         synonyms_short = instance.get_synonyms()
-        synonyms_long = instance.get_synonyms(type='long')
+        synonyms_long = instance.get_synonyms(form='long')
 
         # assert
         synonyms_long_len = len(".".join(synonyms_long))
@@ -148,7 +148,7 @@ class OpenThesaurusTest(unittest.TestCase):
         # act
         instance = OpenThesaurus(word=word)
         synonyms_short = instance.get_synonyms()
-        synonyms_long = instance.get_synonyms(type='long')
+        synonyms_long = instance.get_synonyms(form='long')
 
         # assert
         synonyms_long_len = len(".".join(synonyms_long))
@@ -162,7 +162,7 @@ class OpenThesaurusTest(unittest.TestCase):
 
         # act
         instance = OpenThesaurus(word=word)
-        synonyms = instance.get_synonyms(type='sadsa')
+        synonyms = instance.get_synonyms(form='sadsa')
 
         # assert
         self.assertRaises(RuntimeError)
