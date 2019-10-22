@@ -1,7 +1,7 @@
 from urllib.request import Request
 from urllib.request import urlopen
 from urllib.error import URLError
-import simplejson
+import json
 import py_openthesaurus.log as log
 import re
 
@@ -53,7 +53,7 @@ class OpenThesaurus(object):
 
     def _get_synonyms_from_response(self, response, form):
         synonyms = []
-        json_response = simplejson.loads(response.read())
+        json_response = json.loads(response.read())
 
         for category in json_response.get("synsets"):
             synonyms += self._get_synonyms_from_category(category=category, form=form)

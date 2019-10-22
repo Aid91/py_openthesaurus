@@ -4,7 +4,7 @@ with open("README.md", encoding="utf-8") as file:
     description = file.read()
 
 setup(name="py_openthesaurus",
-      version="1.0.1",
+      version="1.0.2",
       description="Python wrapper for obtaining synonyms in the German language from OpenThesaurus",
       long_description=description,
       long_description_content_type="text/markdown",
