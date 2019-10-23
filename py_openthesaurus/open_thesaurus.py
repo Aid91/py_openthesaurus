@@ -53,7 +53,12 @@ class OpenThesaurus(object):
 
     def _get_synonyms_from_response(self, response, form):
         synonyms = []
-        json_response = json.loads(response.read())
+
+        response_raw = response.read()
+
+        # decode the response to add support for python 3.5
+        response_decoded = response_raw.decode('utf-8')
+        json_response = json.loads(response_decoded)
 
         for category in json_response.get("synsets"):
             synonyms += self._get_synonyms_from_category(category=category, form=form)
