@@ -1,4 +1,4 @@
-from py_openthesaurus import OpenThesaurus
+from py_openthesaurus import OpenThesaurusWeb
 import py_openthesaurus.log as log
 import argparse
 
@@ -22,9 +22,9 @@ def main():
 
     args = parser.parse_args()
 
-    open_thesaurus = OpenThesaurus(word=args.word)
+    open_thesaurus = OpenThesaurusWeb()
 
-    synonyms = open_thesaurus.get_synonyms(form=args.form)
+    synonyms = open_thesaurus.get_synonyms(word=args.word, form=args.form)
 
     logger.info(synonyms)
 
