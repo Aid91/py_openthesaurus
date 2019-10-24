@@ -19,8 +19,8 @@ class OpenThesaurusBase(ABC):
                                   ord(u"Ö"): u"Oe"}
         self.logger = log.setup_custom_logger(__name__)
         self.url = "http://www.openthesaurus.de/synonyme/search?format=application/json&q=%s"
-        self.db_query = """SELECT term.word FROM term, synset, term term2 WHERE synset.is_visible = 1 AND synset.id = 
-        term.synset_id AND term2.synset_id = synset.id AND term2.word = '%s'"""
+        self.db_query = ("SELECT term.word FROM term, synset, term term2 WHERE synset.is_visible = 1 AND synset.id = \n"
+                         "term.synset_id AND term2.synset_id = synset.id AND term2.word = '%s'")
 
     def is_entry_word_valid(self, word):
         if word is None:

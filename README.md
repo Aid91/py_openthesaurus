@@ -14,7 +14,6 @@ The library can be installed from PyPI:
 
 ```pip install py-openthesaurus==1.0.4a0```
 
-
 ### Download open-thesaurus database dump
 
 Download the official open-thesaurus database dump from the following [link](https://www.openthesaurus.de/export/openthesaurus_dump.tar.bz2).
@@ -31,7 +30,6 @@ sudo apt-get install mysql-server
 
 Extract the downloaded database dump file to import it using the following command:
 
-
 ```console
 mysql -u user_name -p database_name < openthesaurus_dump.sql
 ```
@@ -43,7 +41,6 @@ sudo apt-get install python3-pip python3-dev libmysqlclient-dev
 ```
 
 This library, as a dependency, uses `mysqlclient` Python library. For support on other systems, please check the following [link](https://stackoverflow.com/questions/25865270/how-to-install-python-mysqldb-module-using-pip?answertab=votes#tab-top).
-
 
 ### Usage
 
