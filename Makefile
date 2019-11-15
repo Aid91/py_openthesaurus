@@ -14,7 +14,7 @@ lint:
 	pycodestyle --max-line-length=150 py_openthesaurus/*.py
 
 fix_style:
-	autopep8 --in-place --aggreive --aggressive py_openthesaurus/*.py
+	autopep8 --in-place --aggressive py_openthesaurus/*.py
 
 build:
 	python setup.py sdist bdist_wheel

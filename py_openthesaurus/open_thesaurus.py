@@ -37,7 +37,8 @@ class OpenThesaurus(object):
                 with urlopen(request) as response:
                     return self._get_synonyms_from_response(response, form)
             else:
-                logger.warn('Please provide a valid (non empty, non null) input word!')
+                logger.warn(
+                    'Please provide a valid (non empty, non null) input word!')
                 return []
         except URLError:
             logger.error(
@@ -61,7 +62,8 @@ class OpenThesaurus(object):
         json_response = json.loads(response_decoded)
 
         for category in json_response.get("synsets"):
-            synonyms += self._get_synonyms_from_category(category=category, form=form)
+            synonyms += self._get_synonyms_from_category(
+                category=category, form=form)
 
         return synonyms
 
@@ -71,8 +73,11 @@ class OpenThesaurus(object):
         short_form_regex = r"[\(].*?[\)]"
 
         if form == "long":
-            return [re.sub(long_form_regex, "", synonym.get("term")).strip() for synonym in category.get("terms")]
+            return [re.sub(long_form_regex, "", synonym.get("term")).strip()
+                    for synonym in category.get("terms")]
         elif form == "short":
-            return [re.sub(short_form_regex, "", synonym.get("term")).strip() for synonym in category.get("terms")]
+            return [re.sub(short_form_regex, "", synonym.get("term")).strip()
+                    for synonym in category.get("terms")]
         else:
-            raise RuntimeError("Form is not valid! Please choose form to be either: long or short")
+            raise RuntimeError(
+                "Form is not valid! Please choose form to be either: long or short")
