@@ -4,7 +4,8 @@ import py_openthesaurus.log as log
 
 
 class MySQLWrapper(object):
-    def __init__(self, host, port=3306, user="", passwd="", db="", charset='utf8'):
+    def __init__(self, host, port=3306, user="",
+                 passwd="", db="", charset='utf8'):
         self.host = host
         self.port = port
         self.user = user

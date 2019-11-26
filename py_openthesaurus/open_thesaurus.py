@@ -70,7 +70,8 @@ class OpenThesaurusWeb(OpenThesaurusBase):
         json_response = json.loads(response_decoded)
 
         for category in json_response.get("synsets"):
-            synonyms += self._get_synonyms_from_category(category=category, form=form)
+            synonyms += self._get_synonyms_from_category(
+                category=category, form=form)
 
         return synonyms
 
@@ -80,11 +81,14 @@ class OpenThesaurusWeb(OpenThesaurusBase):
         short_form_regex = r"[\(].*?[\)]"
 
         if form == "long":
-            return [re.sub(long_form_regex, "", synonym.get("term")).strip() for synonym in category.get("terms")]
+            return [re.sub(long_form_regex, "", synonym.get("term")).strip()
+                    for synonym in category.get("terms")]
         elif form == "short":
-            return [re.sub(short_form_regex, "", synonym.get("term")).strip() for synonym in category.get("terms")]
+            return [re.sub(short_form_regex, "", synonym.get("term")).strip()
+                    for synonym in category.get("terms")]
         else:
-            raise RuntimeError("Form is not valid! Please choose form to be either: long or short")
+            raise RuntimeError(
+                "Form is not valid! Please choose form to be either: long or short")
 
 
 class OpenThesaurusDb(OpenThesaurusBase):
@@ -94,7 +98,8 @@ class OpenThesaurusDb(OpenThesaurusBase):
         self._connect_db(host, db_name, user, passwd)
 
     def _connect_db(self, host, db_name, user, passwd):
-        self.mysql_db = MySQLWrapper(host=host, db=db_name, user=user, passwd=passwd)
+        self.mysql_db = MySQLWrapper(
+            host=host, db=db_name, user=user, passwd=passwd)
 
     def get_synonyms(self, word, form="short"):
 
@@ -102,7 +107,9 @@ class OpenThesaurusDb(OpenThesaurusBase):
             if self.is_entry_word_valid(word):
                 query = self.db_query % word
                 synonyms = self.mysql_db.select_all(query=query)
-                synonyms = ["%s" % synonym_tupple for synonym_tupple in synonyms]
+                synonyms = [
+                    "%s" %
+                    synonym_tupple for synonym_tupple in synonyms]
                 return self._get_synonyms_based_on_form(synonyms, form=form)
             else:
                 self.logger.warning('Please provide a valid (non empty, non null) input word, instead of word: (%s)',
@@ -126,8 +133,11 @@ class OpenThesaurusDb(OpenThesaurusBase):
         short_form_regex = r"[\(].*?[\)]"
 
         if form == "long":
-            return [re.sub(long_form_regex, "", synonym).strip() for synonym in synonyms]
+            return [re.sub(long_form_regex, "", synonym).strip()
+                    for synonym in synonyms]
         elif form == "short":
-            return [re.sub(short_form_regex, "", synonym).strip() for synonym in synonyms]
+            return [re.sub(short_form_regex, "", synonym).strip()
+                    for synonym in synonyms]
         else:
-            raise RuntimeError("Form is not valid! Please choose form to be either: long or short")
+            raise RuntimeError(
+                "Form is not valid! Please choose form to be either: long or short")

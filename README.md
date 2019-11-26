@@ -12,7 +12,7 @@ This repository represents a Python wrapper implementation for obtaining synonym
 
 The library can be installed from PyPI:
 
-```pip install py-openthesaurus==1.0.4a0```
+```pip install py-openthesaurus```
 
 ### Download open-thesaurus database dump
 
