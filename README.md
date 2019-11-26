@@ -2,6 +2,7 @@
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/2a302faa81aa41ed8647d917c268f5cd)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Aid91/py_openthesaurus&amp;utm_campaign=Badge_Grade)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![Build Status](https://travis-ci.org/Aid91/py_openthesaurus.svg?branch=master)](https://travis-ci.org/Aid91/py_openthesaurus)
 
 When working in Natural Language Processing (NLP) area, synonyms can be an essential part of the data augmentation process. The task of obtaining synonyms for the German language is currently limited since there are no easily accessible lexical databases for the German language. Compared to the WordNet
 lexical database for the English language, which is available as an **nltk** package,  [GermaNet](http://www.sfs.uni-tuebingen.de/GermaNet/) represents only one German lexical database alternative. However, to use **GermaNet** for further research purposes, it is necessary to obtain the license manually. 
