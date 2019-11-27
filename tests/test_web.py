@@ -1,17 +1,17 @@
 import unittest
 
-from py_openthesaurus import OpenThesaurus
+from py_openthesaurus import OpenThesaurusWeb
 
 
-class OpenThesaurusTest(unittest.TestCase):
+class OpenThesaurusWebTest(unittest.TestCase):
 
     def test_entry_word_valid_german(self):
         # arrange
         word = 'München'
 
         # act
-        instance = OpenThesaurus(word=word)
-        valid = instance.is_entry_word_valid()
+        instance = OpenThesaurusWeb()
+        valid = instance.is_entry_word_valid(word=word)
 
         # assert
         self.assertTrue(valid)
@@ -21,8 +21,8 @@ class OpenThesaurusTest(unittest.TestCase):
         word = None
 
         # act
-        instance = OpenThesaurus(word=word)
-        valid = instance.is_entry_word_valid()
+        instance = OpenThesaurusWeb()
+        valid = instance.is_entry_word_valid(word=word)
 
         # assert
         self.assertFalse(valid)
@@ -32,8 +32,8 @@ class OpenThesaurusTest(unittest.TestCase):
         word = '!!!$!!!"??'
 
         # act
-        instance = OpenThesaurus(word=word)
-        valid = instance.is_entry_word_valid()
+        instance = OpenThesaurusWeb()
+        valid = instance.is_entry_word_valid(word=word)
 
         # assert
         self.assertFalse(valid)
@@ -43,8 +43,8 @@ class OpenThesaurusTest(unittest.TestCase):
         word = ''
 
         # act
-        instance = OpenThesaurus(word=word)
-        valid = instance.is_entry_word_valid()
+        instance = OpenThesaurusWeb()
+        valid = instance.is_entry_word_valid(word=word)
 
         # assert
         self.assertFalse(valid)
@@ -54,8 +54,8 @@ class OpenThesaurusTest(unittest.TestCase):
         word = 'Taking!"WDSDA sadsad!!!'
 
         # act
-        instance = OpenThesaurus(word=word)
-        valid = instance.is_entry_word_valid()
+        instance = OpenThesaurusWeb()
+        valid = instance.is_entry_word_valid(word=word)
 
         # assert
         self.assertTrue(valid)
@@ -65,8 +65,8 @@ class OpenThesaurusTest(unittest.TestCase):
         word = 'Taking'
 
         # act
-        instance = OpenThesaurus(word=word)
-        valid = instance.is_entry_word_valid()
+        instance = OpenThesaurusWeb()
+        valid = instance.is_entry_word_valid(word=word)
 
         # assert
         self.assertTrue(valid)
@@ -76,8 +76,8 @@ class OpenThesaurusTest(unittest.TestCase):
         word = 'Taking'
 
         # act
-        instance = OpenThesaurus(word=word)
-        synonyms = instance.get_synonyms()
+        instance = OpenThesaurusWeb()
+        synonyms = instance.get_synonyms(word=word)
 
         # assert
         self.assertFalse(synonyms)
@@ -87,8 +87,8 @@ class OpenThesaurusTest(unittest.TestCase):
         word = ''
 
         # act
-        instance = OpenThesaurus(word=word)
-        synonyms = instance.get_synonyms()
+        instance = OpenThesaurusWeb()
+        synonyms = instance.get_synonyms(word=word)
 
         # assert
         self.assertFalse(synonyms)
@@ -98,8 +98,8 @@ class OpenThesaurusTest(unittest.TestCase):
         word = None
 
         # act
-        instance = OpenThesaurus(word=word)
-        synonyms = instance.get_synonyms()
+        instance = OpenThesaurusWeb()
+        synonyms = instance.get_synonyms(word=word)
 
         # assert
         self.assertFalse(synonyms)
@@ -109,8 +109,8 @@ class OpenThesaurusTest(unittest.TestCase):
         word = 'gehen'
 
         # act
-        instance = OpenThesaurus(word=word)
-        synonyms = instance.get_synonyms(form='long')
+        instance = OpenThesaurusWeb()
+        synonyms = instance.get_synonyms(word=word, form='long')
 
         # assert
         self.assertTrue(synonyms)
@@ -120,8 +120,8 @@ class OpenThesaurusTest(unittest.TestCase):
         word = 'gehen'
 
         # act
-        instance = OpenThesaurus(word=word)
-        synonyms = instance.get_synonyms()
+        instance = OpenThesaurusWeb()
+        synonyms = instance.get_synonyms(word=word)
 
         # assert
         self.assertTrue(synonyms)
@@ -131,9 +131,9 @@ class OpenThesaurusTest(unittest.TestCase):
         word = 'gehen'
 
         # act
-        instance = OpenThesaurus(word=word)
-        synonyms_short = instance.get_synonyms()
-        synonyms_long = instance.get_synonyms(form='long')
+        instance = OpenThesaurusWeb()
+        synonyms_short = instance.get_synonyms(word=word)
+        synonyms_long = instance.get_synonyms(word=word, form='long')
 
         # assert
         synonyms_long_len = len(".".join(synonyms_long))
@@ -146,9 +146,9 @@ class OpenThesaurusTest(unittest.TestCase):
         word = 'München'
 
         # act
-        instance = OpenThesaurus(word=word)
-        synonyms_short = instance.get_synonyms()
-        synonyms_long = instance.get_synonyms(form='long')
+        instance = OpenThesaurusWeb()
+        synonyms_short = instance.get_synonyms(word=word)
+        synonyms_long = instance.get_synonyms(word=word, form='long')
 
         # assert
         synonyms_long_len = len(".".join(synonyms_long))
@@ -161,8 +161,8 @@ class OpenThesaurusTest(unittest.TestCase):
         word = 'München'
 
         # act
-        instance = OpenThesaurus(word=word)
-        synonyms = instance.get_synonyms(form='sadsa')
+        instance = OpenThesaurusWeb()
+        synonyms = instance.get_synonyms(word=word, form='sadsa')
 
         # assert
         self.assertRaises(RuntimeError)

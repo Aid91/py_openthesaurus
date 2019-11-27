@@ -23,6 +23,7 @@ release: build
 	twine upload dist/*
 
 test:
+	pip install -r requirements.txt
 	python -m unittest
 
 .PHONY: lint fix_style build release

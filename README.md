@@ -1,4 +1,4 @@
-## Python wrapper for obtaining synonyms in German language from OpenThesaurus
+## Python wrapper for obtaining synonyms in the German language from OpenThesaurus
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/2a302faa81aa41ed8647d917c268f5cd)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Aid91/py_openthesaurus&amp;utm_campaign=Badge_Grade)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
@@ -15,23 +15,73 @@ The library can be installed from PyPI:
 
 ```pip install py-openthesaurus```
 
-### Usage
+### Download open-thesaurus database dump
 
-As a Python library:
+Download the official open-thesaurus database dump from the following [link](https://www.openthesaurus.de/export/openthesaurus_dump.tar.bz2).
+If the link is not working, please visit the following [page](https://www.openthesaurus.de/about/download) and download the up-to-date database dump.
 
-```python
-from py_openthesaurus import OpenThesaurus
+### Setup mysql and import open-thesaurus database dump
 
-open_thesaurus = OpenThesaurus(word="München")
+To install mysql-server on Ubuntu run:
 
-# to get the short version of synonyms as a list
-synonyms = open_thesaurus.get_synonyms()
-
-# to get the long version of synonyms as a list
-synonyms_long = open_thesaurus.get_synonyms(form='long')
+```console
+sudo apt-get update
+sudo apt-get install mysql-server
 ```
 
-As a command-line tool:
+Create a new database:
+
+```console
+mysql -u user_name -p
+mysql> create database database_name;
+mysql> exit
+```
+
+Extract the downloaded database dump file to import it using the following command:
+
+```console
+mysql -u user_name -p database_name < openthesaurus_dump.sql
+```
+
+To use the `mysqlclient` library in Python on Ubuntu, install the following dependencies:
+
+```console
+sudo apt-get install python3-pip python3-dev libmysqlclient-dev
+```
+
+This library, as a dependency, uses `mysqlclient` Python library. For support on other systems, please check the following [link](https://stackoverflow.com/questions/25865270/how-to-install-python-mysqldb-module-using-pip?answertab=votes#tab-top).
+
+### Usage
+
+As a Python library, retrieving results from a previously imported database:
+
+```python
+from py_openthesaurus import OpenThesaurusDb
+
+open_thesaurus = OpenThesaurusDb(host="host", user="user", passwd="passwd", db_name="database_name")
+
+# to get the short version of synonyms as a list
+synonyms = open_thesaurus.get_synonyms(word="München")
+
+# to get the long version of synonyms as a list
+synonyms_long = open_thesaurus.get_synonyms(word="München", form="long")
+```
+
+As a Python library, retrieving results from a web end-point:
+
+```python
+from py_openthesaurus import OpenThesaurusWeb
+
+open_thesaurus = OpenThesaurusWeb()
+
+# to get the short version of synonyms as a list
+synonyms = open_thesaurus.get_synonyms(word="München")
+
+# to get the long version of synonyms as a list
+synonyms_long = open_thesaurus.get_synonyms(word="München", form="long")
+```
+
+As a command-line tool (which currently obtains results from a web API):
 
 ```console
 usage: py_openthesaurus [-h] [--form {long,short}] --word WORD
@@ -42,9 +92,9 @@ optional arguments:
   -h, --help           show this help message and exit
   --form {long,short}  Defaults to form=short which means that short versions
                        of synonyms will be returned, without nach/zu
-                       prefixes/suffixes.On the other hand, form=long returns
-                       the full versions of synonyms including nach/zu, sich
-                       prefixes/suffixes
+                       prefixes/suffixes. On the other hand, form=long returns
+                       the full versions of synonyms, including nach/zu, sich
+                       prefixes/suffixes.
 
 required arguments:
   --word WORD          A word from which synonyms will be obtained
@@ -57,4 +107,4 @@ required arguments:
 
 ### Licence
 
-Even though this project is under MIT license, please check information about **OpenThesaurus** licensing and API limitations from the following link [API](https://www.openthesaurus.de/about/api), in the case your software will need an exhaustive amount of synonym requests in a short period of time. 
+Even though this project is under MIT license, please check information about **OpenThesaurus** licensing and API limitations (only 60 requests per minute are currently supported) from the following [link](https://www.openthesaurus.de/about/api), in the case your software will need an exhaustive amount of web API requests in a short period of time. 
