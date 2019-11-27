@@ -29,6 +29,14 @@ sudo apt-get update
 sudo apt-get install mysql-server
 ```
 
+Create a new database:
+
+```console
+mysql -u user_name -p
+mysql> create database database_name;
+mysql> exit
+```
+
 Extract the downloaded database dump file to import it using the following command:
 
 ```console
