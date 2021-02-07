@@ -15,23 +15,29 @@ jobs:
       - name: "Python 3.8 on Xenial Linux"
         python: 3.8 # this works for Linux but is ignored on macOS or Windows
         script: make lint || make test
-      - name: "Python 3.6.5 on macOS"
-        os: osx
-        osx_image: xcode10
-        language: shell # 'language: python' is an error on Travis CI macOS
-        install: if [[ $TRAVIS_OS_NAME == "osx" ]]; then brew install mysql; fi
-        script: python3 --version || make lint || make test3
-      - name: "Python 3.7.4 on macOS"
+      - name: "Python 3.5.5 on macOS"
         os: osx
         osx_image: xcode11
         language: shell # 'language: python' is an error on Travis CI macOS
-        install: if [[ $TRAVIS_OS_NAME == "osx" ]]; then brew install mysql; fi
+        install: if [[ $TRAVIS_OS_NAME == "osx" ]]; then brew install mysql && pyenv install --force 3.5.5 && pyenv global 3.5.5; fi
+        script: python3 --version || make lint || make test3
+      - name: "Python 3.6.5 on macOS"
+        os: osx
+        osx_image: xcode11
+        language: shell # 'language: python' is an error on Travis CI macOS
+        install: if [[ $TRAVIS_OS_NAME == "osx" ]]; then brew install mysql && pyenv install --force 3.6.5 && pyenv global 3.6.5; fi
+        script: python3 --version || make lint || make test3
+      - name: "Python 3.7.3 on macOS"
+        os: osx
+        osx_image: xcode11
+        language: shell # 'language: python' is an error on Travis CI macOS
+        install: if [[ $TRAVIS_OS_NAME == "osx" ]]; then brew install mysql && pyenv install --force 3.7.3 && pyenv global 3.7.3; fi
         script: python3 --version || make lint || make test3
       - name: "Python 3.8.0 on macOS"
         os: osx
-        osx_image: xcode12
+        osx_image: xcode11
         language: shell # 'language: python' is an error on Travis CI macOS
-        install: if [[ $TRAVIS_OS_NAME == "osx" ]]; then brew install mysql; fi
+        install: if [[ $TRAVIS_OS_NAME == "osx" ]]; then brew install mysql && pyenv install --force 3.8.0 && pyenv global 3.8.0; fi
         script: python3 --version || make lint || make test3
       - name: "Python 3.6.8 on Windows"
         os: windows
