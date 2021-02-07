@@ -17,30 +17,22 @@ jobs:
         script: make lint || make test
       - name: "Python 3.6.5 on macOS"
         os: osx
-        osx_image: xcode9.4
+        osx_image: xcode10
         language: shell # 'language: python' is an error on Travis CI macOS
-        install: if [[ $TRAVIS_OS_NAME == "osx" ]]; then brew install mysql-connector-c; fi
-        script: make lint || make test3
+        install: if [[ $TRAVIS_OS_NAME == "osx" ]]; then brew install mysql; fi
+        script: python3 --version || make lint || make test3
       - name: "Python 3.7.4 on macOS"
         os: osx
-        osx_image: xcode11.2
+        osx_image: xcode11
         language: shell # 'language: python' is an error on Travis CI macOS
-        install: if [[ $TRAVIS_OS_NAME == "osx" ]]; then brew install mysql-connector-c; fi
-        script: make lint || make test3
+        install: if [[ $TRAVIS_OS_NAME == "osx" ]]; then brew install mysql; fi
+        script: python3 --version || make lint || make test3
       - name: "Python 3.8.0 on macOS"
         os: osx
-        osx_image: xcode11.3
+        osx_image: xcode12
         language: shell # 'language: python' is an error on Travis CI macOS
-        install: if [[ $TRAVIS_OS_NAME == "osx" ]]; then brew install mysql-connector-c; fi
-        script: make lint || make test3
-      - name: "Python 3.5.4 on Windows"
-        os: windows
-        language: shell # 'language: python' is an error on Travis CI Windows
-        before_install:
-          - choco install python --version 3.5.4
-          - python -m pip install --upgrade pip
-        env: PATH=/c/Python35:/c/Python35/Scripts:$PATH
-        script: mingw32-make lint || mingw32-make test
+        install: if [[ $TRAVIS_OS_NAME == "osx" ]]; then brew install mysql; fi
+        script: python3 --version || make lint || make test3
       - name: "Python 3.6.8 on Windows"
         os: windows
         language: shell # 'language: python' is an error on Travis CI Windows
