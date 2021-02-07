@@ -24,36 +24,38 @@ jobs:
         os: osx
         osx_image: xcode11.2  # Python 3.7.4 running on macOS 10.14.4
         language: shell       # 'language: python' is an error on Travis CI macOS
+        install: if [[ $TRAVIS_OS_NAME == "osx" ]]; then brew update > /dev/null && brew install mysql && mysql.server start; fi
         script: make lint || make test3
       - name: "Python 3.8.0 on macOS"
         os: osx
         osx_image: xcode11.3  # Python 3.7.4 running on macOS 10.14.4
         language: shell       # 'language: python' is an error on Travis CI macOS
+        install: if [[ $TRAVIS_OS_NAME == "osx" ]]; then brew update > /dev/null && brew install mysql && mysql.server start; fi
         script: make lint || make test3
       - name: "Python 3.5.4 on Windows"
         os: windows
         language: shell       # 'language: python' is an error on Travis CI Windows
         before_install:
           - choco install python --version 3.5.4
-          - python -m pip install --upgrade pip
+          - python3 -m pip install --upgrade pip
         env: PATH=/c/Python38:/c/Python38/Scripts:$PATH
-        script: make lint || make test
+        script: mingw32-make lint || mingw32-make test
       - name: "Python 3.6.8 on Windows"
         os: windows
         language: shell       # 'language: python' is an error on Travis CI Windows
         before_install:
           - choco install python --version 3.6.8
-          - python -m pip install --upgrade pip
+          - python3 -m pip install --upgrade pip
         env: PATH=/c/Python38:/c/Python38/Scripts:$PATH
-        script: make lint || make test
+        script: mingw32-make lint || mingw32-make test
       - name: "Python 3.7.4 on Windows"
         os: windows
         language: shell       # 'language: python' is an error on Travis CI Windows
         before_install:
           - choco install python --version 3.7.4
-          - python -m pip install --upgrade pip
+          - python3 -m pip install --upgrade pip
         env: PATH=/c/Python38:/c/Python38/Scripts:$PATH
-        script: make lint || make test
+        script: mingw32-make lint || mingw32-make test
       - name: "Python 3.8.0 on Windows"
         os: windows
         language: shell       # 'language: python' is an error on Travis CI Windows
@@ -61,5 +63,5 @@ jobs:
           - choco install python --version 3.8.0
           - python -m pip install --upgrade pip
         env: PATH=/c/Python38:/c/Python38/Scripts:$PATH
-        script: make lint || make test
+        script: mingw32-make lint || mingw32-make test
 install: pip3 install --upgrade pip  # all three OSes agree about 'pip3'
