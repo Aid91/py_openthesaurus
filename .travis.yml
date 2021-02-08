@@ -20,25 +20,25 @@ jobs:
         osx_image: xcode11
         language: shell # 'language: python' is an error on Travis CI macOS
         install: if [[ $TRAVIS_OS_NAME == "osx" ]]; then brew install mysql && eval "$(pyenv init -)" && pyenv install --force 3.5.5 && pyenv global 3.5.5; fi
-        script: python --version || make lint || make test
+        script: make lint || make test
       - name: "Python 3.6.5 on macOS"
         os: osx
         osx_image: xcode11
         language: shell # 'language: python' is an error on Travis CI macOS
         install: if [[ $TRAVIS_OS_NAME == "osx" ]]; then brew install mysql && eval "$(pyenv init -)" && pyenv install --force 3.6.5 && pyenv global 3.6.5; fi
-        script: python --version || make lint || make test
+        script: make lint || make test
       - name: "Python 3.7.3 on macOS"
         os: osx
         osx_image: xcode11
         language: shell # 'language: python' is an error on Travis CI macOS
         install: if [[ $TRAVIS_OS_NAME == "osx" ]]; then brew install mysql && eval "$(pyenv init -)" && pyenv install --force 3.7.3 && pyenv global 3.7.3; fi
-        script: python --version || make lint || make test
+        script: make lint || make test
       - name: "Python 3.8.0 on macOS"
         os: osx
         osx_image: xcode11
         language: shell # 'language: python' is an error on Travis CI macOS
         install: if [[ $TRAVIS_OS_NAME == "osx" ]]; then brew install mysql && eval "$(pyenv init -)" && pyenv install --force 3.8.0 && pyenv global 3.8.0; fi
-        script: python --version || make lint || make test
+        script: make lint || make test
       - name: "Python 3.6.8 on Windows"
         os: windows
         language: shell # 'language: python' is an error on Travis CI Windows
