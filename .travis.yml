@@ -1,8 +1,66 @@
-language: python
+language: python # this works for Linux but is an error on macOS or Windows
 services:
   - mysql
-python:
-  - "3.5"
-  - "3.6"
-  - "3.7"
-script: make lint || make test
+jobs:
+    include:
+      - name: "Python 3.5 on Xenial Linux"
+        python: 3.5 # this works for Linux but is ignored on macOS or Windows
+        script: make lint || make test
+      - name: "Python 3.6 on Xenial Linux"
+        python: 3.6 # this works for Linux but is ignored on macOS or Windows
+        script: make lint || make test
+      - name: "Python 3.7 on Xenial Linux"
+        python: 3.7 # this works for Linux but is ignored on macOS or Windows
+        script: make lint || make test
+      - name: "Python 3.8 on Xenial Linux"
+        python: 3.8 # this works for Linux but is ignored on macOS or Windows
+        script: make lint || make test
+      - name: "Python 3.5.5 on macOS"
+        os: osx
+        osx_image: xcode11
+        language: shell # 'language: python' is an error on Travis CI macOS
+        install: if [[ $TRAVIS_OS_NAME == "osx" ]]; then brew install mysql && eval "$(pyenv init -)" && pyenv install --force 3.5.5 && pyenv global 3.5.5; fi
+        script: make lint || make test
+      - name: "Python 3.6.5 on macOS"
+        os: osx
+        osx_image: xcode11
+        language: shell # 'language: python' is an error on Travis CI macOS
+        install: if [[ $TRAVIS_OS_NAME == "osx" ]]; then brew install mysql && eval "$(pyenv init -)" && pyenv install --force 3.6.5 && pyenv global 3.6.5; fi
+        script: make lint || make test
+      - name: "Python 3.7.3 on macOS"
+        os: osx
+        osx_image: xcode11
+        language: shell # 'language: python' is an error on Travis CI macOS
+        install: if [[ $TRAVIS_OS_NAME == "osx" ]]; then brew install mysql && eval "$(pyenv init -)" && pyenv install --force 3.7.3 && pyenv global 3.7.3; fi
+        script: make lint || make test
+      - name: "Python 3.8.0 on macOS"
+        os: osx
+        osx_image: xcode11
+        language: shell # 'language: python' is an error on Travis CI macOS
+        install: if [[ $TRAVIS_OS_NAME == "osx" ]]; then brew install mysql && eval "$(pyenv init -)" && pyenv install --force 3.8.0 && pyenv global 3.8.0; fi
+        script: make lint || make test
+      - name: "Python 3.6.8 on Windows"
+        os: windows
+        language: shell # 'language: python' is an error on Travis CI Windows
+        before_install:
+          - choco install python --version 3.6.8
+          - python -m pip install --upgrade pip
+        env: PATH=/c/Python36:/c/Python36/Scripts:$PATH
+        script: mingw32-make lint || mingw32-make test
+      - name: "Python 3.7.4 on Windows"
+        os: windows
+        language: shell # 'language: python' is an error on Travis CI Windows
+        before_install:
+          - choco install python --version 3.7.4
+          - python -m pip install --upgrade pip
+        env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
+        script: mingw32-make lint || mingw32-make test
+      - name: "Python 3.8.0 on Windows"
+        os: windows
+        language: shell # 'language: python' is an error on Travis CI Windows
+        before_install:
+          - choco install python --version 3.8.0
+          - python -m pip install --upgrade pip
+        env: PATH=/c/Python38:/c/Python38/Scripts:$PATH
+        script: mingw32-make lint || mingw32-make test
+install: pip3 install --upgrade pip  # all three OSes agree about 'pip3'
